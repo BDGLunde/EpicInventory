@@ -6,4 +6,6 @@ The basic idea of the project is to simulate an inventory system that supports (
 
 Before committing this project, I added support for being able to press the [ESC] key to navigate backwards through prompts within a menu and back through menus themselves. 
 
+No "skeleton code" was provided, and everything besides the "...SuppliedCode.dll" (which mostly provided Interfaces to be adhered to and instrumented collections for unit tests) and most of the unit tests (and of course, the .NET components themselves :)) were written by me.
+
 I do not plan on updating this project any further. 

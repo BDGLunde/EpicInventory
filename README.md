@@ -8,4 +8,6 @@ Before committing this project, I added support for being able to press the [ESC
 
 No "skeleton code" was provided, and everything besides the "...SuppliedCode.dll" (which mostly provided Interfaces to be adhered to and instrumented collections for unit tests) and most of the unit tests (and of course, the .NET components themselves :)) were written by me.
 
+*.suo (Visual Studio user option extension) files were included in the repo so that the correct Startup project for the solution is maintained when cloned. 
+
 I do not plan on updating this project any further. 

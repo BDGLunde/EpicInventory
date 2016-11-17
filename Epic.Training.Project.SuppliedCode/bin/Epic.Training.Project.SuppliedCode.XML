@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epic.Training.Project.SuppliedCode</name>
+    </assembly>
+    <members>
+        <member name="T:Epic.Training.Project.SuppliedCode.Exceptions.DuplicateProductNameException">
+            <summary>
+            Throw this exception when attempting to add an IProduct to an IProductList
+            when the list already contains a product with the same name.  Also throw
+            if changing the name of a product in the list causes a name conflict with another
+            product also in the list.
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Exceptions.DuplicateProductNameException.#ctor(System.String)">
+            <summary>
+            Creates an instance of the DuplicateProductNameException
+            </summary>
+            <param name="productName">The name that already exists in the collection.</param>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Exceptions.DuplicateProductNameException.DuplicateName">
+            <summary>
+            The name that already exists in the list
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion">
+            <summary>
+            Records the number of steps from instrumented lists/dictionaries that were measured over an enclosed code segment.
+            </summary>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion._stepsAtStart">
+            <summary>
+            The initial measurement
+            </summary>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion._stepsAtEnd">
+            <summary>
+            The final measurement
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion.#ctor(System.String,System.Int32)">
+            <summary>
+            Create a new measured region
+            </summary>
+            <param name="name"></param>
+            <param name="referenceSteps"></param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion.EndRegion">
+            <summary>
+            Close the currently open measured reagion
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion.Name">
+            <summary>
+            A description of what this region is measuring
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion.ReferenceSteps">
+            <summary>
+            The number of steps you expected to measure
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Instrumentation.MeasuredRegion.MeasuredSteps">
+            <summary>
+            The number of actual steps measured
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker">
+            <summary>
+            Tracks steps of instrumented collections
+            </summary>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker._steps">
+            <summary>
+            Current number of steps
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.ResetSteps">
+            <summary>
+            Reset the number of steps that have happened
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.Increment">
+            <summary>
+            Increase the number of steps by 1
+            </summary>
+            <returns>The resulting number of steps</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.Increment(System.Int32)">
+            <summary>
+            Increase the number of steps by a fixed amount
+            </summary>
+            <param name="stepCount">The size of the step</param>
+            <returns>the resulting number of steps</returns>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.CurrentRegion">
+            <summary>
+            The current region being measured
+            </summary>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker._regions">
+            <summary>
+            List of measured regions
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.StartRegion(System.String,System.Int32)">
+            <summary>
+            Start a new measured region
+            </summary>
+            <param name="regionName">The name of the measured reagion</param>
+            <param name="referenceSteps">The number of steps you expect to see</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.EndRegion">
+            <summary>
+            End the currently open measured region and record the number of steps that have passed.
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.ClearRegions">
+            <summary>
+            Removes all currently measured Regions
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.StepCount">
+            <summary>
+            Get the number of steps of instrumented collections
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Instrumentation.StepTracker.Regions">
+            <summary>
+            Get a list of all measured regions
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2">
+            <summary>
+            An instrumented sorted dictionary used in the C# training project
+            </summary>
+            <remarks>
+            Iterating over the Values property returns the values sorted by key
+            </remarks>
+            <typeparam name="TKey">Key type</typeparam>
+            <typeparam name="TValue">Value type</typeparam>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2._dictionary">
+            <summary>
+            Backing List
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Add(`0,`1)">
+            <summary>
+            Adds an element too the dictionary
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="key">The key of the object being added</param>
+            <param name="value">The value being added to the dictionary under the given key</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.ContainsKey(`0)">
+            <summary>
+            Determine if the dictionary contains the given key
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="key">The key you are looking for</param>
+            <returns>True if the dictionary contains the key, false otherwise</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Remove(`0)">
+            <summary>
+            Remove the key and corresponding value from the collection
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="key">The key to remove</param>
+            <returns>True if the key was removed, false otherwise</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Attempts to return the value corresponding to the given key.  The keys are in sorted order.
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="key">The key to look up</param>
+            <param name="value">The value stored under the given key</param>
+            <returns>True if the value was returned, false otherwise</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Clear">
+            <summary>
+            Clear the dictionary
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.#ctor">
+            <summary>
+            Default constructor for serialization
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            The most roundabout way of circumventing a framework bug of all time
+            </summary>
+            <param name="info">The SerializationInfo object</param>
+            <param name="context">The StreamingContext</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serializer
+            </summary>
+            <param name="info">The SerializationInfo object</param>
+            <param name="context">The StreamingContext</param>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Keys">
+            <summary>
+            The keys in use iby this dictionary.  
+            </summary>
+            <remarks>
+            The returned collection is also instrumented.
+            </remarks>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Values">
+            <summary>
+            Returns the values currently in the collection. The values are in sorted order by key.
+            </summary>
+            <remarks>
+            The returned collection is also instrumented.  
+            </remarks>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Item(`0)">
+            <summary>
+            Return the value under the geven key
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="key">The key of the value to look up</param>
+            <returns>The value under the corresponding key</returns>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedDictionary`2.Count">
+            <summary>
+            Return the number of elements in the dictionary.
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1">
+            <summary>
+            Instrumented list used for the C# training project.
+            </summary>
+            <remarks>
+            This collection implements INotifyCollectionChanged, so it can be used 
+            like an ObservableCollection.
+            </remarks>
+            <typeparam name="T">The type stored in the list</typeparam>
+        </member>
+        <member name="F:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1._list">
+            <summary>
+            The contained list
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Construct a new list, inserting the provided collection of items into the list
+            </summary>
+            <param name="toAdd">The collection to add to the list</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.IndexOf(`0)">
+            <summary>
+            Determine the location of an item in the list.
+            </summary>
+            <param name="item">The item to find in the list</param>
+            <remarks>
+            Counts as 1 step per item iterated over when looking up the index of item.
+            </remarks>
+            <returns>The index of the item</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Insert(System.Int32,`0)">
+            <summary>
+            Insert a new item into the list at the given index.  
+            </summary>
+            <remarks>
+            Counts as 1 step.
+            </remarks>
+            <param name="index">Position to insert the item</param>
+            <param name="item">The item to insert</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.RemoveAt(System.Int32)">
+            <summary>
+            Remove the item at the given index
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="index">Index to remove the item</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Add(`0)">
+            <summary>
+            Add an item to the end of the list
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="item">Item to add</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Clear">
+            <summary>
+            Clear all items from the list
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Contains(`0)">
+            <summary>
+            Search the list from the beginning to determine if the given item is present in the list.
+            </summary>
+            <remarks>
+            Counts as 1 step per item iterated over while searching for item.
+            </remarks>
+            <param name="item">Item to search for</param>
+            <returns>True if the item is in the list, false otherwise.</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copy the list to an array
+            </summary>
+            <param name="array">Array to copy to</param>
+            <param name="arrayIndex">Index to begin copying from</param>
+            <remarks>
+            Counts as N steps, where N is the number of items in the list
+            </remarks>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Remove(`0)">
+            <summary>
+            Search the list and remove the given item if a match is found.
+            </summary>
+            <param name="item">Item </param>
+            <remarks>
+            Counts as 1 step per item iterated over while searching for item
+            </remarks>
+            <returns>True if the item was removed, false otherwise.</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.GetEnumerator">
+            <summary>
+            Allows for foreach iteration over this collection.
+            </summary>
+            <remarks>
+            Counts as 1 step per item iterated over
+            </remarks>
+            <returns>Enumerator for the next item in the list</returns>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Item(System.Int32)">
+            <summary>
+            Get or set an item at the specific index
+            </summary>
+            <remarks>
+            Counts as 1 step
+            </remarks>
+            <param name="index">Index to access</param>
+            <returns>Item at the given position</returns>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.Count">
+            <summary>
+            Return the number of items in the list
+            </summary>
+        </member>
+        <member name="E:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.CollectionChanged">
+            <summary>
+            Event raised when the mix of items in the collection is altered.
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Collections.InstrumentedList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Determine if this collection can be edited
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Interfaces.IProduct">
+            <summary>
+            Interface for a product contained within an IProductList
+            </summary>
+            <remarks>
+            You may need to do some research online to figure out how to properly implement
+            INotifyPropertyChanging and INotifyPropertyChanged.  A good place to start is 
+            http://msdn.microsoft.com
+            </remarks>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.Name">
+            <summary>
+            The name of the product.  The name should be unique within a given IProductList.
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.Weight">
+            <summary>
+            Weight of the product in pounds.  
+            </summary>
+            <exception cref="T:System.ArgumentException">
+            Throws an argument exception if value is less than or equal to 0
+            </exception>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.WholesalePrice">
+            <summary>
+            Price of the product in dollars before any markup
+            </summary>
+            <exception cref="T:System.ArgumentException">
+            Throws an argument exception if value is negative
+            </exception>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.QuantityOnHand">
+            <summary>
+            Quantity of the product available.
+            </summary>
+            <exception cref="T:System.ArgumentException">
+            Throws an argument exception if value is negative
+            </exception>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.RetailPrice">
+            <summary>
+            Retail price of the product, based the shipping cost and markup factor.
+            RetailPrice = WholesalePrice x MarkupFactor + Shipping cost
+            MarkupFactor = 1.7
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProduct.ShippingCost">
+            <summary>
+            Cost to ship one unit of the product
+            ShippingCost = 3.25 x Weight
+            ShippingFactor = 3.25
+            </summary>
+        </member>
+        <member name="T:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1">
+            <summary>
+            Interface for the product list  Implement all features as efficiently as possible.
+            </summary>
+            <typeparam name="T">The class implementing IProduct that this inventory contains</typeparam>
+            <remarks>
+            Iterating over this list using foreach should return items in the order that they were added.
+            </remarks>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.Add(`0)">
+            <summary>
+            Add a new product to the inventory. 
+            </summary>
+            <param name="toAdd">The item to add to the list</param>
+            <exception cref="T:Epic.Training.Project.SuppliedCode.Exceptions.DuplicateProdutNameException">
+            Thrown if the item being added has a name matching a product already in the list
+            </exception>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.Remove(`0)">
+            <summary>
+            Remove a product from the inventory, provided it is there already.
+            </summary>
+            <param name="toRemove">The item to remove from the list</param>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.Contains(`0)">
+            <summary>
+            Determine if the given product is in the list
+            </summary>
+            <param name="toCheck">Item to check to see if it is in the list</param>
+            <returns>True if the product is in the list, false otherwise</returns>
+        </member>
+        <member name="M:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.GetSortedProductsByName">
+            <summary>
+            Returns items in sorted order by name.
+            </summary>
+            <remarks>
+            Used for reporting
+            </remarks>
+            <returns>Items in sorted order</returns>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.TotalProducts">
+            <summary>
+            Total number of different products.
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.ItemsInStock">
+            <summary>
+            Sum of the quantity of all products
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.TotalWholesalePrice">
+            <summary>
+            Sum of the Quantity * Wholesale price of all products
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.TotalRetailPrice">
+            <summary>
+            Sum of the Quantity * RetailPrice of all products
+            </summary>
+        </member>
+        <member name="P:Epic.Training.Project.SuppliedCode.Interfaces.IProductList`1.Item(System.String)">
+            <summary>
+            Get the product based on its name.  Names must be unique within the Inventory.
+            </summary>
+            <param name="name">The name of the product to return</param>
+            <returns>The product with a matching name, or null if no such product exists in the inventory</returns>
+        </member>
+    </members>
+</doc>
